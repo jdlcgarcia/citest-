@@ -12,4 +12,4 @@ jobs:
       # composer install
       - run: composer install -n --prefer-dist
       # run tests!
-      - run: vendor/bin/phpunit
+      - run: vendor/bin/phpunit tests

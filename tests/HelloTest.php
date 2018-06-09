@@ -9,6 +9,6 @@ class HelloTest extends TestCase
     public function testHi()
     {
         $hello = new Hello();
-        $this->assertEquals("Hello World!",$hello->hi());
+        $this->assertEquals("I come in peace",$hello->hi());
     }
 }

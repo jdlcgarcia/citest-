@@ -3,6 +3,6 @@ namespace jdlc\citest;
 
 class Hello {
 	public function hi() {
-		return "Hello World!";
+		return "I come in peace";
 	}
 }

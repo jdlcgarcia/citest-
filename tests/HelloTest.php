@@ -11,4 +11,10 @@ class HelloTest extends TestCase
         $hello = new Hello();
         $this->assertEquals("I come in peace",$hello->hi());
     }
+
+    public function testKlingon()
+    {
+        $hello = new Hello();
+        $this->assertEquals("qo' vIvan!", $hello->klingon());
+    }
 }

@@ -5,4 +5,4 @@ use jdlc\citest\Hello;
 
 
 $hello = new Hello();
-$hello->hi();
+echo $hello->hi();

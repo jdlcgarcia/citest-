@@ -1,0 +1,20 @@
+{  
+	"name": "jdlc/citest",  
+	"description": "CI test",   
+	"keywords": ["ci","test"],  
+	"authors": [  
+		{  
+			"name": "Juan Garcia",  
+			"email": "jcruzgar@gmail.com"  
+		}  
+	],  
+	"require": {},  
+	"require-dev": {  
+		"phpunit/phpunit": "*"
+	},  
+	"autoload": {  
+		"psr-4": {  
+			"jdlc\\citest\\": "src"  
+		}  
+	}  
+}  

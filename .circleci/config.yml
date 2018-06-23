@@ -9,8 +9,11 @@ jobs:
 
     steps:
       - checkout
-      # composer install
-      - run: composer install -n --prefer-dist
-      - run: sudo docker-php-ext-enable xdebug
+      - run:
+        name: Setup dependencies
+        command: |
+          sudo composer self-update
+          composer install -n --prefer-dist
+          sudo docker-php-ext-enable xdebug
       # run tests!
-      - run: sudo vendor/bin/phpunit --coverage-clover clover.xml
+      - run: sudo vendor/bin/phpunit --coverage-html $CIRCLE_ARTIFACTS

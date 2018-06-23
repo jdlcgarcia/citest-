@@ -16,4 +16,4 @@ jobs:
             composer install -n --prefer-dist
             sudo docker-php-ext-enable xdebug
       # run tests!
-      - run: sudo vendor/bin/phpunit --coverage-html $CIRCLE_ARTIFACTS
+      - run: sudo vendor/bin/phpunit --coverage-html $CIRCLE_ARTIFACTS/coverage.html

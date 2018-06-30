@@ -17,4 +17,4 @@ jobs:
             sudo docker-php-ext-enable xdebug
       # run tests!
       # - run: sudo vendor/bin/phpunit --coverage-html $CIRCLE_ARTIFACTS/coverage.html
-      - run: php -dxdebug.coverage_enable=1 vendor/phpunit/phpunit/phpunit --coverage-clover $CIRCLE_ARTIFACTS/citest$tests.xml --configuration phpunit.xml --teamcity
+      - run: sudo php -dxdebug.coverage_enable=1 vendor/phpunit/phpunit/phpunit --coverage-clover $CIRCLE_ARTIFACTS/citest$tests.xml --configuration phpunit.xml --teamcity

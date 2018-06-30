@@ -9,7 +9,19 @@ jobs:
 
     steps:
       - checkout
-      # composer install
-      - run: composer install -n --prefer-dist
+      - run:
+          name: Setup dependencies
+          command: |
+            sudo composer self-update
+            composer install -n --prefer-dist
+            sudo docker-php-ext-enable xdebug
       # run tests!
-      - run: vendor/bin/phpunit tests
+      - run:
+          command: |
+            mkdir -p ~/phpunit
+            sudo php -dxdebug.coverage_enable=1 vendor/phpunit/phpunit/phpunit --coverage-clover ~/phpunit/citest$tests.xml --coverage-html ~/phpunit --configuration phpunit.xml --teamcity
+          when: always
+      - store_test_results:
+          path: ~/phpunit
+      - store_artifacts:
+          path: ~/phpunit

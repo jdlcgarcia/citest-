@@ -21,7 +21,7 @@ jobs:
           command: |
             mkdir -p ~/phpunit
             vendor/phpunit/phpunit/phpunit --log-junit ~/phpunit/junit.xml tests
-            sudo php -dxdebug.coverage_enable=1 vendor/phpunit/phpunit/phpunit --coverage-clover ~/phpunit/citest$tests.xml --configuration phpunit.xml --teamcity
+            sudo php -dxdebug.coverage_enable=1 vendor/phpunit/phpunit/phpunit --coverage-clover ~/phpunit/citest$tests.xml --coverage-html ~/phpunit/citest$tests.html --configuration phpunit.xml --teamcity
           when: always
       - store_test_results:
           path: ~/phpunit

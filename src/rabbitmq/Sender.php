@@ -28,7 +28,7 @@ class Sender extends RabbitMQConfig
         $this->connection = new AMQPStreamConnection(self::HOST, self::PORT, self::USER, self::PASSWORD);
         $this->channel = $this->connection->channel();
         $this->queueName = $queueName;
-        $this->channel->queue_declare($this->queueName, false, false, false, false);
+        $this->channel->queue_declare($this->queueName, false, true, false, false);
     }
 
     /**
@@ -37,7 +37,7 @@ class Sender extends RabbitMQConfig
      */
     public function send($message)
     {
-        $msg = new AMQPMessage($message);
+        $msg = new AMQPMessage($message, ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT]);
         $this->channel->basic_publish($msg, '', $this->queueName);
         echo " [x] Sent $message\n";
     }
@@ -47,4 +47,22 @@ class Sender extends RabbitMQConfig
         $this->channel->close();
         $this->connection->close();
     }
+
+    /**
+     * @return AMQPChannel
+     */
+    public function getChannel(): AMQPChannel
+    {
+        return $this->channel;
+    }
+
+    /**
+     * @return string
+     */
+    public function getQueueName(): string
+    {
+        return $this->queueName;
+    }
+
+
 }

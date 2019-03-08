@@ -28,7 +28,7 @@ class Receiver extends RabbitMQConfig
         $this->connection = new AMQPStreamConnection(self::HOST, self::PORT, self::USER, self::PASSWORD);
         $this->channel = $this->connection->channel();
         $this->queueName = $queueName;
-        $this->channel->queue_declare($this->queueName, false, false, false, false);
+        $this->channel->queue_declare($this->queueName, false, true, false, false);
     }
 
     /**
@@ -45,4 +45,22 @@ class Receiver extends RabbitMQConfig
             $this->channel->wait();
         }
     }
+
+    /**
+     * @return AMQPChannel
+     */
+    public function getChannel(): AMQPChannel
+    {
+        return $this->channel;
+    }
+
+    /**
+     * @return string
+     */
+    public function getQueueName(): string
+    {
+        return $this->queueName;
+    }
+
+
 }

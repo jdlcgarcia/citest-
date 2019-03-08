@@ -8,7 +8,7 @@ use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class Sender
+class Sender extends RabbitMQConfig
 {
     /** @var AMQPStreamConnection  */
     private $connection;
@@ -16,23 +16,29 @@ class Sender
     /** @var AMQPChannel  */
     private $channel;
 
+    /** @var string  */
+    private $queueName;
+
     /**
      * Sender constructor.
+     * @param string $queueName
      */
-    public function __construct()
+    public function __construct(string $queueName)
     {
-        $this->connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+        $this->connection = new AMQPStreamConnection(self::HOST, self::PORT, self::USER, self::PASSWORD);
         $this->channel = $this->connection->channel();
-        $this->channel->queue_declare('hello', false, false, false, false);
+        $this->queueName = $queueName;
+        $this->channel->queue_declare($this->queueName, false, false, false, false);
     }
 
     /**
      * @param $message string
+     * @param $key
      */
     public function send($message)
     {
         $msg = new AMQPMessage($message);
-        $this->channel->basic_publish($msg, '', 'hello');
+        $this->channel->basic_publish($msg, '', $this->queueName);
         echo " [x] Sent $message\n";
     }
 

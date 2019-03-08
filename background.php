@@ -4,7 +4,7 @@ use jdlc\citest\rabbitmq\Receiver;
 
 include_once 'vendor/autoload.php';
 
-$receiver = new Receiver("hello");
+$receiver = new Receiver("task_queue");
 
 try {
     $receiver->receive();

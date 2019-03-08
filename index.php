@@ -6,5 +6,5 @@ use jdlc\citest\rabbitmq\Sender;
 
 
 $hello = new Hello();
-$sender = new Sender();
+$sender = new Sender("hello");
 $sender->send($hello->hi());

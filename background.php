@@ -4,7 +4,7 @@ use jdlc\citest\rabbitmq\Receiver;
 
 include_once 'vendor/autoload.php';
 
-$receiver = new Receiver();
+$receiver = new Receiver("hello");
 
 try {
     $receiver->receive();

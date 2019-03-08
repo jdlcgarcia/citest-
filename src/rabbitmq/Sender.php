@@ -23,7 +23,7 @@ class Sender
     {
         $this->connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
         $this->channel = $this->connection->channel();
-
+        $this->channel->queue_declare('hello', false, false, false, false);
     }
 
     /**
@@ -31,7 +31,6 @@ class Sender
      */
     public function send($message)
     {
-        $this->channel->queue_declare('hello', false, false, false, false);
         $msg = new AMQPMessage($message);
         $this->channel->basic_publish($msg, '', 'hello');
         echo " [x] Sent $message\n";

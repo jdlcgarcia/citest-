@@ -11,6 +11,17 @@ class Exchange extends Queue
     private $exchangeName;
 
     /**
+     * Exchange constructor.
+     * @param string $exchangeName
+     */
+    public function __construct(string $exchangeName)
+    {
+        parent::__construct($exchangeName);
+        $this->exchangeName = $exchangeName;
+    }
+
+
+    /**
      * @return string
      */
     public function getExchangeName()

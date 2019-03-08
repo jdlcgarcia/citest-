@@ -2,7 +2,7 @@
 
 use jdlc\citest\rabbitmq\Worker;
 
-include_once 'vendor/autoload.php';
+include_once '../bootstrap.php';
 
 $worker = new Worker("task_queue");
 try {

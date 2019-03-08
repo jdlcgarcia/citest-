@@ -2,7 +2,7 @@
 
 use jdlc\citest\rabbitmq\Tasker;
 
-include_once 'vendor/autoload.php';
+include_once '../bootstrap.php';
 
 $data = implode(' ', array_slice($argv, 1));
 if (empty($data)) {

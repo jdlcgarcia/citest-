@@ -5,3 +5,6 @@ Master [![CircleCI](https://circleci.com/gh/jdlcgarcia/citest-/tree/master.svg?s
 
 Dev [![CircleCI](https://circleci.com/gh/jdlcgarcia/citest-/tree/dev.svg?style=svg)](https://circleci.com/gh/jdlcgarcia/citest-/tree/dev)
 
+## Instalation
+
+1. `$ composer install`

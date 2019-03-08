@@ -3,66 +3,24 @@
 
 namespace jdlc\citest\rabbitmq;
 
-
-use PhpAmqpLib\Channel\AMQPChannel;
-use PhpAmqpLib\Connection\AMQPStreamConnection;
-use PhpAmqpLib\Message\AMQPMessage;
-
-class Sender extends RabbitMQConfig
+class Sender extends Queue implements AbstractQueueWrite
 {
-    /** @var AMQPStreamConnection  */
-    private $connection;
-
-    /** @var AMQPChannel  */
-    private $channel;
-
-    /** @var string  */
-    private $queueName;
-
     /**
      * Sender constructor.
      * @param string $queueName
      */
     public function __construct(string $queueName)
     {
-        $this->connection = new AMQPStreamConnection(self::HOST, self::PORT, self::USER, self::PASSWORD);
-        $this->channel = $this->connection->channel();
-        $this->queueName = $queueName;
-        $this->channel->queue_declare($this->queueName, false, true, false, false);
+        parent::__construct($queueName);
+        $this->getChannel()->queue_declare($this->getQueueName(), false, true, false, false);
     }
 
     /**
-     * @param $message string
-     * @param $key
+     * @param string $message
      */
-    public function send($message)
+    public function publish(string $message)
     {
-        $msg = new AMQPMessage($message, ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT]);
-        $this->channel->basic_publish($msg, '', $this->queueName);
+        $this->getChannel()->basic_publish(self::buildMessage($message), '', $this->getQueueName());
         echo " [x] Sent $message\n";
     }
-
-    public function close()
-    {
-        $this->channel->close();
-        $this->connection->close();
-    }
-
-    /**
-     * @return AMQPChannel
-     */
-    public function getChannel(): AMQPChannel
-    {
-        return $this->channel;
-    }
-
-    /**
-     * @return string
-     */
-    public function getQueueName(): string
-    {
-        return $this->queueName;
-    }
-
-
 }

@@ -7,6 +7,6 @@ class Tasker extends Sender
 {
     public function addTask(string $data)
     {
-        parent::send($data);
+        parent::publish($data);
     }
 }

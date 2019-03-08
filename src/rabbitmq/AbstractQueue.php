@@ -3,8 +3,7 @@
 
 namespace jdlc\citest\rabbitmq;
 
-
-abstract class RabbitMQConfig
+interface AbstractQueue
 {
     const HOST = 'localhost';
     const PORT = 5672;

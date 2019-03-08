@@ -5,30 +5,17 @@ namespace jdlc\citest\rabbitmq;
 
 
 use ErrorException;
-use PhpAmqpLib\Channel\AMQPChannel;
-use PhpAmqpLib\Connection\AMQPStreamConnection;
 
-class Receiver extends RabbitMQConfig
+class Receiver extends Queue implements AbstractQueueRead
 {
-    /** @var AMQPStreamConnection  */
-    private $connection;
-
-    /** @var AMQPChannel  */
-    private $channel;
-
-    /** @var string */
-    private $queueName;
-
     /**
      * Receiver constructor.
      * @param string $queueName
      */
     public function __construct(string $queueName)
     {
-        $this->connection = new AMQPStreamConnection(self::HOST, self::PORT, self::USER, self::PASSWORD);
-        $this->channel = $this->connection->channel();
-        $this->queueName = $queueName;
-        $this->channel->queue_declare($this->queueName, false, true, false, false);
+        parent::__construct($queueName);
+        $this->getChannel()->queue_declare($this->getQueueName(), false, true, false, false);
     }
 
     /**
@@ -40,27 +27,9 @@ class Receiver extends RabbitMQConfig
         $callback = function ($msg) {
             echo ' [x] Received ', $msg->body, "\n";
         };
-        $this->channel->basic_consume($this->queueName, '', false, true, false, false, $callback);
-        while (count($this->channel->callbacks)) {
-            $this->channel->wait();
+        $this->getChannel()->basic_consume($this->getQueueName(), '', false, true, false, false, $callback);
+        while (count($this->getChannel()->callbacks)) {
+            $this->getChannel()->wait();
         }
     }
-
-    /**
-     * @return AMQPChannel
-     */
-    public function getChannel(): AMQPChannel
-    {
-        return $this->channel;
-    }
-
-    /**
-     * @return string
-     */
-    public function getQueueName(): string
-    {
-        return $this->queueName;
-    }
-
-
 }

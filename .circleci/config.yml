@@ -3,12 +3,15 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: notnoopci/php:7.1.5-browsers
+      - image: circleci/php:7.1
 
     working_directory: ~/repo
 
     steps:
       - checkout
+      - run:
+          name: Install bcmath
+          command: sudo docker-php-ext-install bcmath && sudo docker-php-ext-enable bcmath
       - run:
           name: Setup dependencies
           command: |
@@ -18,10 +21,6 @@ jobs:
       # run tests!
       - run:
           command: |
-            composer update
-            sleep 10
-            composer install -n --prefer-dist
-            sleep 10
             mkdir -p ~/phpunit
             sudo php -dxdebug.coverage_enable=1 vendor/phpunit/phpunit/phpunit --coverage-clover ~/phpunit/citest$tests.xml --coverage-html ~/phpunit --configuration phpunit.xml --teamcity
           when: always

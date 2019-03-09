@@ -13,6 +13,9 @@ jobs:
           name: Install bcmath
           command: sudo docker-php-ext-install bcmath && sudo docker-php-ext-enable bcmath
       - run:
+          name: Install sockets
+          command: sudo docker-php-ext-install sockets && sudo docker-php-ext-enable sockets
+      - run:
           name: Setup dependencies
           command: |
             sudo composer self-update

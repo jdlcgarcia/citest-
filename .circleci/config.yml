@@ -18,6 +18,8 @@ jobs:
       # run tests!
       - run:
           command: |
+            composer update
+            composer install -n --prefer-dist
             mkdir -p ~/phpunit
             sudo php -dxdebug.coverage_enable=1 vendor/phpunit/phpunit/phpunit --coverage-clover ~/phpunit/citest$tests.xml --coverage-html ~/phpunit --configuration phpunit.xml --teamcity
           when: always

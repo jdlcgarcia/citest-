@@ -19,7 +19,9 @@ jobs:
       - run:
           command: |
             composer update
+            sleep 10
             composer install -n --prefer-dist
+            sleep 10
             mkdir -p ~/phpunit
             sudo php -dxdebug.coverage_enable=1 vendor/phpunit/phpunit/phpunit --coverage-clover ~/phpunit/citest$tests.xml --coverage-html ~/phpunit --configuration phpunit.xml --teamcity
           when: always

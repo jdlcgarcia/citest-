@@ -11,5 +11,5 @@ if (empty($data)) {
     $data = "Hello World!";
 }
 
-$direct = new ExchangeDirect("logs_severity", [$severity]);
-$direct->publish($data);
+$direct = new ExchangeDirect("logs_severity");
+$direct->publish($data, $severity);

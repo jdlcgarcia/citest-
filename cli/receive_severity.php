@@ -11,10 +11,10 @@ if (empty($severities)) {
     exit(1);
 }
 
-$direct = new ExchangeDirect("logs_severity", $severities);
+$direct = new ExchangeDirect("logs_severity");
 
 try {
-    $direct->receive();
+    $direct->receive($severities);
 } catch (ErrorException $e) {
     echo $e->getMessage();
 }

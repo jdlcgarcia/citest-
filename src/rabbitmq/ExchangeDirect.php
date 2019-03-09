@@ -6,40 +6,38 @@ namespace jdlc\citest\rabbitmq;
 
 use ErrorException;
 
-class ExchangeDirect extends Exchange implements AbstractQueueRead, AbstractQueueWrite
+class ExchangeDirect extends Exchange
 {
     const TYPE = 'direct';
 
-    /** @var string[] */
-    private $keys;
-
     /**
-     * ExchangeFanout constructor.
+     * ExchangeDirect constructor.
      * @param $exchangeName
      * @param $keys
      */
-    public function __construct($exchangeName, $keys)
+    public function __construct($exchangeName)
     {
         parent::__construct($exchangeName, self::TYPE);
-        $this->keys = $keys;
     }
 
     /**
      * @param string $message
+     * @param $key
      */
-    public function publish(string $message)
+    public function publish(string $message, $key)
     {
-        $this->getChannel()->basic_publish(self::buildMessage($message), $this->getExchangeName(), $this->keys[0]);
+        $this->getChannel()->basic_publish(self::buildMessage($message), $this->getExchangeName(), $key);
         echo " [x] Sent $message\n";
     }
 
     /**
+     * @param $keys
      * @throws ErrorException
      */
-    public function receive()
+    public function receive($keys)
     {
         list($queue_name, ,) = $this->getChannel()->queue_declare("");
-        foreach($this->keys as $key) {
+        foreach($keys as $key) {
             $this->getChannel()->queue_bind($queue_name, $this->getExchangeName(), $key);
         }
         echo " [*] Waiting for logs. To exit press CTRL+C\n";

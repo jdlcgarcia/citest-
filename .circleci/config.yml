@@ -3,12 +3,18 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: notnoopci/php:7.1.5-browsers
+      - image: circleci/php:7.1
 
     working_directory: ~/repo
 
     steps:
       - checkout
+      - run:
+          name: Install bcmath
+          command: sudo docker-php-ext-install bcmath && sudo docker-php-ext-enable bcmath
+      - run:
+          name: Install sockets
+          command: sudo docker-php-ext-install sockets && sudo docker-php-ext-enable sockets
       - run:
           name: Setup dependencies
           command: |

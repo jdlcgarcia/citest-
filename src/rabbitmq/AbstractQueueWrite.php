@@ -4,7 +4,7 @@
 namespace jdlc\citest\rabbitmq;
 
 
-interface AbstractQueueWrite extends AbstractQueue
+interface AbstractQueueWrite
 {
     /**
      * @param string $message

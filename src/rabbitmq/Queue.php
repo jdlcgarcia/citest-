@@ -8,7 +8,7 @@ use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class Queue implements AbstractQueue
+class Queue
 {
     /** @var AMQPStreamConnection  */
     private $connection;
@@ -25,7 +25,7 @@ class Queue implements AbstractQueue
      */
     protected function __construct(string $queueName)
     {
-        $this->connection = new AMQPStreamConnection(self::HOST, self::PORT, self::USER, self::PASSWORD);
+        $this->connection = new AMQPStreamConnection($_ENV['RABBITMQ_HOST'], $_ENV['RABBITMQ_PORT'], $_ENV['RABBITMQ_USER'], $_ENV['RABBITMQ_PASSWD']);
         $this->channel = $this->connection->channel();
         $this->queueName = $queueName;
     }

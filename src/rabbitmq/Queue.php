@@ -23,7 +23,7 @@ class Queue implements AbstractQueue
      * Sender constructor.
      * @param string $queueName
      */
-    public function __construct(string $queueName)
+    protected function __construct(string $queueName)
     {
         $this->connection = new AMQPStreamConnection(self::HOST, self::PORT, self::USER, self::PASSWORD);
         $this->channel = $this->connection->channel();
@@ -48,10 +48,11 @@ class Queue implements AbstractQueue
 
     /**
      * @param $message
+     * @param array $config
      * @return AMQPMessage
      */
-    public function buildMessage($message) {
-        return new AMQPMessage($message, ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT]);
+    public function buildMessage($message, $config = ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT]) {
+        return new AMQPMessage($message, $config);
     }
 
     public function close()

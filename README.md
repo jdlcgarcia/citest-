@@ -17,4 +17,4 @@ Dev [![CircleCI](https://circleci.com/gh/jdlcgarcia/citest-/tree/dev.svg?style=s
 
 ## Join the Slack channel
 
-https://join.slack.com/t/jdlcdev/shared_invite/enQtNTc2MTE1NDk0Mjc1LTE2NWUzZThmZjc0ZTc2YTZlNjZjMmIwYTFkODBhMzJmY2YxMzhiNzk1YWY5YmExYzIzYmM0ZjFjYTA3YjJiZjA
+[Ask for an invitation!](https://join.slack.com/t/jdlcdev/shared_invite/enQtNTc2MTE1NDk0Mjc1LTE2NWUzZThmZjc0ZTc2YTZlNjZjMmIwYTFkODBhMzJmY2YxMzhiNzk1YWY5YmExYzIzYmM0ZjFjYTA3YjJiZjA)

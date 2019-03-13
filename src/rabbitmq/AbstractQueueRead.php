@@ -6,7 +6,7 @@ namespace jdlc\citest\rabbitmq;
 
 use ErrorException;
 
-interface AbstractQueueRead extends AbstractQueue
+interface AbstractQueueRead
 {
     /**
      * @throws ErrorException

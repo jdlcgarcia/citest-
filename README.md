@@ -14,3 +14,7 @@ Dev [![CircleCI](https://circleci.com/gh/jdlcgarcia/citest-/tree/dev.svg?style=s
 ## Instalation
 
 1. `$ composer install`
+
+## Join the Slack channel
+
+https://join.slack.com/t/jdlcdev/shared_invite/enQtNTc2MTE1NDk0Mjc1LTE2NWUzZThmZjc0ZTc2YTZlNjZjMmIwYTFkODBhMzJmY2YxMzhiNzk1YWY5YmExYzIzYmM0ZjFjYTA3YjJiZjA

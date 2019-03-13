@@ -8,7 +8,6 @@ class FibonacciTestTest extends TestCase
 
     public function testBaseCase0()
     {
-        $this->assertTrue(false);
         $fibonacho = new Fibonacci();
         $this->assertEquals(0, $fibonacho->getN(0));
     }

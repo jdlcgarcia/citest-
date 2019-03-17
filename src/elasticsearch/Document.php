@@ -56,4 +56,13 @@ class Document
             "body" => $this->body
         ];
     }
+
+    public function getter()
+    {
+        return [
+            "index" => $this->index,
+            "type" => $this->type,
+            "id" => $this->id
+        ];
+    }
 }

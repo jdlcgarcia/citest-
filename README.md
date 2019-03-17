@@ -10,6 +10,7 @@ Dev [![CircleCI](https://circleci.com/gh/jdlcgarcia/citest-/tree/dev.svg?style=s
 * PHP >7.1
 * Apache 2.4
 * RabbitMQ 3.7.12
+* ElasticSearch 6.6.2
 
 ## Instalation
 

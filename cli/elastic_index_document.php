@@ -2,21 +2,17 @@
 include_once '../bootstrap.php';
 
 use Elasticsearch\ClientBuilder;
+use jdlc\citest\elasticsearch\Document;
+use jdlc\citest\model\Definition;
 
 
 $client = ClientBuilder::create()->build();
+$document = new Document("old_database", "old_table", "1");
+$definition = new Definition("I come in peace", [
+        Definition::ESPANOL => "Vengo en son de paz",
+        Definition::KLINGON => "qo' vIvan!"
+    ]);
+$document->setBody($definition->export());
 
-$params = [
-    "body" => [
-        "english" => "I come in peace",
-        "spanish" => "Vengo en son de paz",
-        "klingon" => "qo' vIvan!"
-    ],
-    "index" => "old_database",
-    "type" => "old_table",
-    "id" => "1"
-];
-
-$result = $client->index($params);
-
+$result = $client->index($document->export());
 var_dump($result);
